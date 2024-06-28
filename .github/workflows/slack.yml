@@ -1,0 +1,29 @@
+name: Dagger.io - Post Slack Message
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: string
+        description: 'Name Of Individual'
+        required: false
+
+      message:
+        type: string
+        description: 'Message To Send In Slack'
+        required: false
+jobs:
+  slack_dagger_demo:
+    runs-on:  [ubuntu-latest]
+    steps:
+        - name: Checkout 
+          uses: actions/checkout@v4 
+                    
+        - name: Run Dagger
+          uses: dagger/dagger-for-github@v5
+          with:
+            workdir: ${{github.workspace}}/dagger_io/demo
+            version: latest
+            module: demo
+            verb: call
+            args: set-name --name="${{github.event.inputs.name || '""'}}" set-message --message "${{github.event.inputs.message || '""'}}" send-slack-message --webhook ${{secrets.WEBHOOK}}
+            cloud-token: 9fd48a8e-329a-4afa-9896-2908b1c28de3
