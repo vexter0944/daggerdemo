@@ -26,4 +26,4 @@ jobs:
             module: demo
             verb: call
             args: set-name --name="${{github.event.inputs.name || '""'}}" set-message --message "${{github.event.inputs.message || '""'}}" send-slack-message --webhook ${{secrets.WEBHOOK}}
-            cloud-token: 9fd48a8e-329a-4afa-9896-2908b1c28de3
+            cloud-token: ${{secrets.DAGGER_TOKEN}}

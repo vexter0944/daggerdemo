@@ -28,4 +28,4 @@ jobs:
             module: demo
             verb: call
             args: hello --greeting="${{github.event.inputs.greeting}}" --name="${{github.event.inputs.name}}" 
-            cloud-token: 9fd48a8e-329a-4afa-9896-2908b1c28de3
+            cloud-token: ${{secrets.DAGGER_TOKEN}}
